@@ -1,11 +1,10 @@
-// 1- Insert http module
+const WebSocket = require('ws');
 const http = require('http');
 const path = require('path');
 const fs = require('fs');
 
-// 2- Create a server
-const server = http.createServer((request, response) => {
-    // 3.1- Parse URL and determine filename
+// -- 1. CREATE A SERVER --
+const server = http.createServer((request, response) => {// 3.1- Parse URL and determine filename
     console.log(`Request URL: ${request.url}`);
 
     // http://localhost:3006 => c:\...\fileName.html
@@ -29,6 +28,9 @@ const server = http.createServer((request, response) => {
             break;
         case '.css':
             contentType = 'text/css';
+            break;
+        case '.js':
+            contentType = 'text/javascript';
             break;
         case '.mp3':
             contentType = 'audio/mpeg';
@@ -69,8 +71,34 @@ const server = http.createServer((request, response) => {
     // 3.5- If file found - return file
 });
 
-// 4- Start the server
-const PORT = 3006
+
+// -- 2. INITIALIZE THE WS SERVER --
+const wss = new WebSocket.Server({ server });
+
+// -- 3 Handling Client connections --
+wss.on('connection', ws => {
+    // A) In case of a message from the client
+    ws.on('message', message => {
+        console.log(`Received: ${message}`);
+
+        // Send connection message
+        wss.clients.forEach(client => {
+            if (client.readyState === WebSocket.OPEN) {
+                client.send(message);
+            }
+        })
+    });
+
+    // B) Send a 'connection' message
+    console.log('Client connected');
+});
+
+
+
+
+
+// -- Start the server --
+const PORT = 3003
 server.listen(PORT, () => {
     console.log(`Server is running on port http://localhost:${PORT}`);
 });
