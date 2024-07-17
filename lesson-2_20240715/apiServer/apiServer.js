@@ -25,7 +25,6 @@ const customers = [
 const server = http.createServer((request, response) => {
     // API structure
     // -- 'http://localhost:3003/api/v1/customers'
-    // /api/v1/customers - GET
     // /api/v1/customers/{id} - GET (ONE)
     // /api/v1/customers - POST --> {body: {name:, address:, ...}}
     // /api/v1/customers/{id} - PUT --> {body: {id:, name:, address:, ...}}
@@ -38,7 +37,7 @@ const server = http.createServer((request, response) => {
     const method = request.method; // --> GET
 
     // 2. Handle specific URI and METHOD request
-    // /api/v1/customers - GET (ALL)
+    // /api/v1/customers - GET - (ALL)
     if (pathname === '/api/v1/customers' && method === 'GET') {
         response.writeHead(200, { 'Content-Type': 'application/json' });
 
