@@ -70,7 +70,7 @@ router.delete('/:id', (req, res) => {
     const { id } = req.params;
     console.log('id', id);
 
-    const idx = customers.findIndex(c => c.id === id);
+    const idx = customers.findIndex(c => c.id === parseInt(id));
     customers.slice(idx);
 
     // res.send('Create a customer');
