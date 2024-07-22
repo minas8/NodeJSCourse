@@ -25,7 +25,8 @@ router.get('/:id', (req, res) => {
     const { id } = req.params;
     console.log('id', id);
 
-    const customer = customers.find(c => c.id === id);
+    const customer = customers.find(c => c.id === parseInt(id));
+    console.log(customer.name);
 
     res.status(200).json(customer);
 })

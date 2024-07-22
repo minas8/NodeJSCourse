@@ -28,17 +28,18 @@ app.use((req, res, next) => {
     // }
 
     res.on('finish', () => {
-        console.log();
+        console.log('Finish');
     })
+    next();
 });
+
+// Delegating routing for '/api/customers' starting endpoint
+app.use('/api/customers', customerRoutes);
 
 // 2. Set up the routes
 app.get('/', (req, res) => {
     res.send({ message: 'Hello World!' });
 })
-
-// Delegating routing for '/api/customers' starting endpoint
-app.use('/api/customers', customerRoutes);
 
 // Examle: /api/search?q=hello
 app.get('/api/search', (req, res, next) => {
