@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Add Account</title>
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
+</head>
+
+<body>
+    <h1>Add Account</h1>
+    <form action="/add-account" method="POST">
+        <label for="accountNumber">Account Number:</label>
+        <input type="number" name="accountNumber" id="accountNumber" required>
+        <br>
+        <label for="balance">Balance:</label>
+        <input type="number" name="balance" id="balance" value="0" disabled>
+        <br>
+        <button type="submit">Add Account</button>
+    </form>
+    <a href="/accounts">Back to Home</a>
+</body>
+
+</html>

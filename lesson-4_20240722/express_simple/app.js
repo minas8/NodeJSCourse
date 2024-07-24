@@ -19,18 +19,25 @@ app.use((req, res, next) => {
 
 // Custome middleware - LOG RESPONSES
 app.use((req, res, next) => {
-    // const oldSend = res.send;
-    // res.send = (body) => {
-    //     console.log(`Bodey: ${body}`);
-    //     // Function.call(oldSend, body);
-    //     oldSend.call(this, body);
-    //     next();
-    // }
+    const oldSend = res.send;
+    const oldJSON = res.json;
 
-    res.on('finish', () => {
-        console.log('Finish');
-    })
+    res.send = function (body) {
+        console.log(`Body: ${body}`);
+        oldSend.call(this, body);
+    }
+
+    res.json = function (body) {
+        console.log(`JSON Body: ${JSON.stringify(body)}`);
+        oldJSON.call(this, body);
+    }
+
     next();
+
+    // res.on('finish', () => {
+    //     console.log('Finish');
+    // })
+    // next();
 });
 
 // Delegating routing for '/api/customers' starting endpoint
