@@ -1,9 +1,10 @@
 // -- INPORTS --
-const express = require('express');
-const router = express.Router();
+const express = require('express').Router();
+const Transaction = require('../models/transaction');
 
 router.get('/', (req, res) => {
-    res.render('index', { user: user });
+    // res.render('index', { user: user });
+    res.render('index');
 });
 
 router.get('/transfer', (req, res) => {
@@ -52,33 +53,33 @@ router.get('/transactions', async (req, res) => {
     res.render('transactions', { transactions: transactions });
 });
 
-router.get('/add-account', async (req, res) => {
-    const accounts = await Account.find();
+// router.get('/add-account', async (req, res) => {
+//     const accounts = await Account.find();
 
-    res.render('add-account', { accounts: accounts });
-});
+//     res.render('add-account', { accounts: accounts });
+// });
 
-router.post('/add-account', async (req, res) => {
-    const accountNumber = parseFloat(req.body.accountNumber);
+// router.post('/add-account', async (req, res) => {
+//     const accountNumber = parseFloat(req.body.accountNumber);
 
-    if (accountNumber) {
+//     if (accountNumber) {
 
-        // -- NEW, using MongoDB --
-        try {
-            const account = new Account({
-                accountNumber: accountNumber,
-                balance: balance
-            });
+//         // -- NEW, using MongoDB --
+//         try {
+//             const account = new Account({
+//                 accountNumber: accountNumber,
+//                 balance: balance
+//             });
 
-            await account.save();
-            res.redirect('/');
-        } catch (err) {
-            console.log(`DB Error: ${err.message}`);
-            res.redirect('/');
-        };
-    }
+//             await account.save();
+//             res.redirect('/');
+//         } catch (err) {
+//             console.log(`DB Error: ${err.message}`);
+//             res.redirect('/');
+//         };
+//     }
 
-    res.redirect('/');
-});
+//     res.redirect('/');
+// });
 
 module.exports = router;

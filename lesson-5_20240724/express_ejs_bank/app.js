@@ -1,14 +1,14 @@
 // -- INPORTS --
-const express = require('express').Router();
+const express = require('express');
 const bodyParser = require('body-parser');
 const resLogger = require('./middlewares/response-logger');
+const authMiddleware = require('./middlewares/auth');
 
 // -- DB & CONFIG INPORTS --
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
-const Transaction = require('./models/transaction');
+
 const Account = require('./models/account');
-const authMiddleware = require('./middlewares/auth');
 
 // -- CONTROLLERS IMPORTS --
 const accountController = require('./controllers/account');
@@ -54,7 +54,6 @@ mongoose.connect(connectionString, { useNewUrlParser: true })
     });
 
 // const transactions = [];
-
 
 
 // -- CONTROLLERS -- MVC --

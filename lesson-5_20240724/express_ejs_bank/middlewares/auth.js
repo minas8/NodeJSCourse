@@ -1,5 +1,6 @@
-const auth = (req, rea, next) => {
-
+const auth = (req, res, next) => {
+    console.log('Am I allowed?');
+    next();
 }
 
-module.exports = authMiddleware;
+module.exports = auth;
