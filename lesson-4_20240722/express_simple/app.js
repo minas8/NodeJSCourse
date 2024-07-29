@@ -13,11 +13,11 @@ app.use(express.json());
 
 // Custome middleware - LOGGING
 app.use((req, res, next) => {
-    console.log(`${logCounter} | Method: ${req.method} | Params: ${req.params}`);
+    console.log(`${logCounter++} | Method: ${req.method} | Params: ${JSON.stringify(req.params)}`);
     next();
 });
 
-// Custome middleware - LOG RESPONSES
+// Custome middleware - LOG RESPONSES - SEND & JSON
 app.use((req, res, next) => {
     const oldSend = res.send;
     const oldJSON = res.json;
@@ -45,6 +45,10 @@ app.use('/api/customers', customerRoutes);
 
 // 2. Set up the routes
 app.get('/', (req, res) => {
+    res.send('Hello World!');
+})
+
+app.get('/api', (req, res) => {
     res.send({ message: 'Hello World!' });
 })
 
@@ -59,7 +63,7 @@ app.get('/api/search', (req, res, next) => {
 
     // Perform search
     const error = new Error('Critical server error');
-    error.status = 403;
+    error.status = 401;
 
     if (error) {
         next(error);
@@ -69,6 +73,7 @@ app.get('/api/search', (req, res, next) => {
 })
 
 // POST-HANDLER MIDDLEWARE
+
 // Custome middleware - ERRORS
 app.use((err, req, res, next) => {
     console.log(`Error: ${err.status} - ${err.message}`);

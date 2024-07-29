@@ -10,7 +10,7 @@ const dotenv = require('dotenv');
 
 const Account = require('./models/account');
 
-// -- CONTROLLERS IMPORTS --
+// -- CONTROLLER IMPORTS --
 const accountController = require('./controllers/account');
 const authController = require('./controllers/auth');
 
@@ -57,7 +57,7 @@ mongoose.connect(connectionString, { useNewUrlParser: true })
 
 
 // -- CONTROLLERS -- MVC --
-app.use('/accounts', authMiddleware, accountController);
+// app.use('/accounts', authMiddleware, accountController);
 app.use('/auth', authController);
 
 app.listen(port, () => {

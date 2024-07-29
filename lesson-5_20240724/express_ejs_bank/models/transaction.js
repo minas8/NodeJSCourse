@@ -11,7 +11,11 @@ const TransactionSchema = new mongoose.Schema({
         ref: 'User.accounts',
         required: true
     },
-    toAccount: { type: String, required: true },
+    toAccount: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User.accounts',
+        required: true
+    },
     notes: { type: String }
 });
 

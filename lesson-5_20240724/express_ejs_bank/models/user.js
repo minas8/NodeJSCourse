@@ -4,8 +4,8 @@ const mongoose = require('mongoose');
 
 // 2. Define schema
 const AccountSchema = new mongoose.Schema({
-    number: { type: String, required: true },
-    balance: { type: Number, default: 0 }
+    number: { type: Number, required: true },
+    balance: { type: Number, required: true }
 });
 
 const UserSchema = new mongoose.Schema({
